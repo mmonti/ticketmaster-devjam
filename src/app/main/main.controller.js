@@ -24,7 +24,8 @@
         var params = {
           latlong: checkin.venue.location.lat + "," + checkin.venue.location.lng,
           radius: 5,
-          unit: "miles"
+          unit: "miles",
+          startDateTime: new Date().toISOString()
         }
         ticketmasterService.findEvents(params).then(function(ticketmaster) {
            vm.eventsNearBy[checkin.id] = ticketmaster.data._embedded.events
