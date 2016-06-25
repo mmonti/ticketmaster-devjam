@@ -12,6 +12,7 @@
     if (token) {
       authService.setToken(token);
     }
+    // We redirect home.
     $state.go('home');
   }
 })();
