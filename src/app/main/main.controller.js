@@ -6,17 +6,30 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, authService) {
+  function MainController($timeout, authService, $http) {
     var vm = this;
 
     vm.token = authService.getToken();
     vm.auth = function() {
-      var redirect = window.location.href.replace(window.location.hash, '');
-      var authenticate_uri = "https://foursquare.com/oauth2/authenticate?client_id={CLIENT_ID}&response_type=token&redirect_uri={REDIRECT_URI}".supplant({
-        CLIENT_ID: "BNHHOTSNIO0QMO4H2IKHDOIL3WYCF2GH1NDBQMV2WCNJQMCA",
-        REDIRECT_URI: encodeURIComponent(redirect + "#/auth")
+        authService.authenticate();
+    }
+
+    if (vm.token) {
+      var _url = "https://api.foursquare.com/v2/users/self/checkins?oauth_token={TOKEN}&v=20160625".supplant({
+        TOKEN: vm.token
       });
-      window.location.href = authenticate_uri;
+
+      $http({
+        method: 'GET',
+        url: _url
+      }).then(function successCallback(response) {
+        console.log(response);
+
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.log(response);
+      });
     }
   }
 })();
