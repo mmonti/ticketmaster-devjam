@@ -6,9 +6,12 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider) {
-    // Enable log
+  function config($logProvider, localStorageServiceProvider) {
+    // = Enable log
     $logProvider.debugEnabled(true);
+
+    // = localStorageServiceProvider
+    localStorageServiceProvider.setPrefix('ticketmaster');
   }
 
 })();

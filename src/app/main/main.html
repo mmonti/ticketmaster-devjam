@@ -13,5 +13,21 @@
       User is authenticated!
       TOKEN: {{main.token}}
     </div>
+
+    <div class="col-lg-12" ng-show="main.token">
+      <p>
+        Total Checkins: {{main.checkins.count}}
+      </p>
+      <div ng-repeat="checkin in main.checkins.items">
+        <p>
+          {{checkin.shout}}
+        </p>
+        <p>
+          Venue: {{checkin.venue.location.address}}
+          ZIP: {{checkin.venue.location.postalCode}}
+          City: {{checkin.venue.location.city}}
+        </p>
+      </div>
+    </div>
   </div>
 </div>

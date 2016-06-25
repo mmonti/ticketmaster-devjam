@@ -6,14 +6,18 @@
     .factory('authService', AuthService);
 
   /** @ngInject */
-  function AuthService($log, $http) {
+  function AuthService($log, $http, localStorageService) {
     var token = null;
     var service = {
       setToken: function(_token) {
         token = _token
+        localStorageService.set('token', token);
       },
       getToken : function() {
-        return token;
+        if (token) {
+          return token;
+        }
+        return localStorageService.get('token');
       },
       authenticate : function() {
         var redirect = window.location.href.replace(window.location.hash, '');
