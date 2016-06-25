@@ -15,24 +15,21 @@
     }
 
     if (vm.token) {
-      ticketmasterService.findEvents().then(function(ticketmaster) {
-        console.log(ticketmaster);
-      });
-
       checkinService.getCheckins(vm.token).then(function(foursquare) {
         vm.checkins = foursquare.data.response.checkins;
-      })
+      });
 
-      console.log("Calling TM");
-
-      ticketMasterService.findEvents().then(
-        function successCallback(response) {
-          console.log(response);
-        }, function errorCallback(response) {
-          console.log("ERROR: " + response);
+      vm.findEvents = function(checkin) {
+        vm.eventsNearBy = {};
+        var params = {
+          latlong: checkin.venue.location.lat + "," + checkin.venue.location.lng,
+          radius: 5,
+          unit: "miles"
         }
-      );
-
+        ticketmasterService.findEvents(params).then(function(ticketmaster) {
+           vm.eventsNearBy[checkin.id] = ticketmaster.data._embedded.events
+        });
+      }
     }
   }
 })();

@@ -26,6 +26,13 @@
           Venue: {{checkin.venue.location.address}}
           ZIP: {{checkin.venue.location.postalCode}}
           City: {{checkin.venue.location.city}}
+
+          <button type="button" name="button" ng-click="main.findEvents(checkin)">events near by...</button>
+          <div class="" ng-show="main.eventForCheckin[checkin.id]">
+            <div class="" ng-repeat="event in main.eventForCheckin[checkin.id]">
+              {{event.name}}
+            </div>
+          </div>
         </p>
       </div>
     </div>
