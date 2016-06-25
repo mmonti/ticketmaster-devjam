@@ -9,31 +9,13 @@
   function MainController($timeout, webDevTec, toastr) {
     var vm = this;
 
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1466878011982;
-    vm.showToastr = showToastr;
-
-    activate();
-
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
-    }
-
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
-
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
-
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
+    vm.auth = function() {
+      var authenticate_uri = "https://foursquare.com/oauth2/authenticate?client_id={CLIENT_ID}&response_type=token&redirect_uri={REDIRECT_URI}".supplant({
+        CLIENT_ID: "BNHHOTSNIO0QMO4H2IKHDOIL3WYCF2GH1NDBQMV2WCNJQMCA",
+        REDIRECT_URI: "http://localhost:3000/#/"
       });
+
+      window.location.href = authenticate_uri;
     }
   }
 })();

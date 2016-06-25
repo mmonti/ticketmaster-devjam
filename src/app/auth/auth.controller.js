@@ -6,9 +6,11 @@
     .controller('AuthController', AuthController);
 
   /** @ngInject */
-  function AuthController($timeout, webDevTec, toastr) {
+  function AuthController($timeout, webDevTec, toastr, $location, $routeParams) {
     var vm = this;
 
-    
+    vm.routeParams = $routeParams;
+
+
   }
 })();
