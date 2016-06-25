@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, authService, checkinService, eventsService) {
+  function MainController($timeout, authService, checkinService, ticketmasterService) {
     var vm = this;
 
     vm.token = authService.getToken();
@@ -15,12 +15,24 @@
     }
 
     if (vm.token) {
-      eventsService.getEvents().then(function(ticketmaster) {
+      ticketmasterService.findEvents().then(function(ticketmaster) {
         console.log(ticketmaster);
       });
+
       checkinService.getCheckins(vm.token).then(function(foursquare) {
         vm.checkins = foursquare.data.response.checkins;
       })
+
+      console.log("Calling TM");
+
+      ticketMasterService.findEvents().then(
+        function successCallback(response) {
+          console.log(response);
+        }, function errorCallback(response) {
+          console.log("ERROR: " + response);
+        }
+      );
+
     }
   }
 })();
