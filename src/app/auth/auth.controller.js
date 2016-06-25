@@ -6,11 +6,12 @@
     .controller('AuthController', AuthController);
 
   /** @ngInject */
-  function AuthController($timeout, webDevTec, toastr, $location, $routeParams) {
+  function AuthController($rootScope, $state, $location, authService) {
     var vm = this;
-
-    vm.routeParams = $routeParams;
-
-
+    var token = $location.hash().split("=")[1];
+    if (token) {
+      authService.setToken(token);
+    }
+    $state.go('home');
   }
 })();

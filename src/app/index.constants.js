@@ -4,7 +4,6 @@
 
   angular
     .module('ticketmaster')
-    .constant('malarkey', malarkey)
-    .constant('moment', moment);
+    .constant('magicNumber', 42);
 
 })();

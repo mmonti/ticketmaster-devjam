@@ -14,8 +14,8 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
-      .state('accessToken', {
-        url: '/access_token',
+      .state('auth', {
+        url: '/auth',
         templateUrl: 'app/auth/auth.html',
         controller: 'AuthController',
         controllerAs: 'main'

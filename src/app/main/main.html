@@ -5,8 +5,12 @@
       Ticketmaster DEV JAM!
     </div>
 
-    <div class="col-lg-12">
+    <div class="col-lg-12" ng-show="!main.token">
       <button type="button" name="button" ng-click="main.auth()">Authenticate</button>
+    </div>
+
+    <div class="col-lg-12" ng-show="main.token">
+      User is authenticated!
     </div>
   </div>
 </div>
